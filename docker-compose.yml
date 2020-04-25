@@ -1,0 +1,20 @@
+version: '3'
+services:
+  myapp:
+    build: myapp/
+    image: webserver:latest
+    network_mode: host
+    ports: 
+     - 5000:5000
+    container_name: myapp
+    depends_on: 
+     - mongodb
+
+  mongodb:
+    image: mongo:4.2.5-bionic
+    restart: always
+    ports: 
+     - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
