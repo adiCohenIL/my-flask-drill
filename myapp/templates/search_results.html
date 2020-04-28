@@ -1,0 +1,13 @@
+<body>
+   <style> table, th, td { border: 1px solid black; } </style>
+  <table>
+    <tr>
+        <td><b>Entries that contains {{ search }}</b></td>
+    </tr>
+    {% for key, value in search_result.items() %}
+      <tr>
+          <td>{{ value }}</td>
+      </tr>
+    {% endfor %} 
+  </table>
+</body>

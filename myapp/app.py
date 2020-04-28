@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
    
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, render_template
 import pymongo
 
 #Mongo metadata
@@ -20,19 +20,20 @@ def hello():
 def save_2_mongo():
        text = request.form["text"]
        search = request.form["search"]
-       mydict = { "phrase": text }
-       mycol.insert_one(mydict)
-       return 'Inserted phrase %s to mogoDB search is %s !!' % text,search
+       if text:
+           mydict = { "phrase": text }
+           mycol.insert_one(mydict)
+           return 'Inserted phrase %s to mogoDB !!' % text
+       if search:
+           myquery = { "phrase": {'$regex': search }} 
+           mydoc = mycol.find(myquery)
 
+           mydict = [x for x in mydoc]
+           search_result = {}
+           count = 0
+           for x in mydict:
+               count+=1
+               search_result.update({count: x[key] for key in x.keys() & {'phrase'}})
 
-
-#myquery = { "address": "Highway 37" }
-
-#mydoc = mycol.find(myquery)
-#for x in mydoc:
-#   print(x)
-
-###handler = http.server.SimpleHTTPRequestHandler
-
-###with socketserver.TCPServer(("",1234), handler) as httpd:
-###    httpd.serve_forever()
+           #return 'search res %s !!' % search_result
+           return render_template('search_results.html', search=search ,search_result=search_result)
