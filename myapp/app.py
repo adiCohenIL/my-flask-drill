@@ -4,7 +4,7 @@ from flask import Flask, request, render_template
 import pymongo
 
 #Mongo metadata
-MONGO_URI = 'mongodb://root:example@localhost'
+MONGO_URI = 'mongodb://root:example@mongo'
 myclient = pymongo.MongoClient(MONGO_URI)
 mydb = myclient["mydatabase"]
 mycol = mydb["phrases"]

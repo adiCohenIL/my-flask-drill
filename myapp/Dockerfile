@@ -4,6 +4,7 @@ ADD app.py /server/
 ADD wsgi.py /server/
 RUN mkdir -p /server/templates
 ADD templates/index.html /server/templates
+ADD templates/search_results.html /server/templates
 WORKDIR /server/
 ENV FALSK_APP=app.py
 CMD [ "flask" , "run" ]
