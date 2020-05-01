@@ -37,3 +37,6 @@ def save_2_mongo():
 
            #return 'search res %s !!' % search_result
            return render_template('search_results.html', search=search ,search_result=search_result)
+
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0')

@@ -6,6 +6,7 @@ services:
     ports: 
      - 5000:5000
     container_name: myapp
+    command: gunicorn --bind 0.0.0.0:5000 wsgi:app
     depends_on: 
      - mongo
 
