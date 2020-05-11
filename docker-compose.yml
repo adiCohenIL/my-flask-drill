@@ -1,12 +1,21 @@
 version: '3'
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
   myapp:
-    build: myapp/
+    build: .
     image: webserver:latest
     ports: 
      - 5000:5000
     container_name: myapp
     command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    environment:
+      - VIRTUAL_HOST=phrase.local
     depends_on: 
      - mongo
 
