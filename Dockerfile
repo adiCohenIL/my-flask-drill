@@ -8,5 +8,5 @@ ADD myapp/templates/index.html /server/templates
 ADD myapp/templates/search_results.html /server/templates
 WORKDIR /server/
 ENV FALSK_APP=app.py
-CMD [ "flask" , "run" ]
-#CMD [ "gunicorn" , "--bind" , "0.0.0.0:5000" , "--bind" , "unix:app.sock" , "wsgi:app" ]
+#CMD [ "flask" , "run" ]
+CMD [ "gunicorn" , "--bind" , "0.0.0.0:5000" ,  "wsgi:app" ]
